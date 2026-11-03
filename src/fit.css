@@ -1,0 +1,25 @@
+html,body,#root{height:100%;overflow:hidden}
+.app{min-height:0;overflow:hidden}
+.lesson-scroll{overflow:hidden;display:flex;padding-bottom:8px;scrollbar-gutter:auto}
+.fit-viewport{position:relative;flex:1;min-width:0;min-height:0;overflow:hidden}
+.fit-slide{position:absolute;left:50%;top:0;max-width:none;min-height:0;margin:0;transform-origin:top center;animation:none;padding-bottom:4px}
+.fit-slide textarea{resize:none}
+.fit-slide .schedule-scroll{max-height:none;overflow:visible;scrollbar-gutter:auto}
+.table-pager{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:10px;font-size:13px}
+.table-pager>div{display:flex;gap:8px;align-items:center}
+.table-pager button{padding:7px 12px;font-size:13px}
+.schedule-comparison ol{margin:12px 0;padding-left:24px}
+.schedule-comparison li{overflow-wrap:anywhere}
+@media(max-width:900px){
+ .app-header{height:56px;padding:8px 16px}.brand small{font-size:10px}.brand-mark{width:32px;height:32px}.brand{font-size:16px;gap:8px}
+ .stage-nav{display:flex;height:65px;flex:none;padding:0 12px}.stage-nav button{font-size:11px;padding:6px;gap:4px}
+ .lesson-header{padding:10px 4vw;gap:12px}.lesson-header h1{font-size:25px}.lesson-header .eyebrow{margin-bottom:4px}.lesson-header .eyebrow>span{display:none}
+ footer{height:58px;padding:8px 4vw}footer>button{font-size:13px;padding:8px 12px}.footer-center{max-width:240px}
+ .fit-slide .two,.fit-slide .wide-left,.fit-slide .wide-right,.fit-slide .slide-1 .two{grid-template-columns:1fr 1fr}
+ .fit-slide .eye-layout{grid-template-columns:1.6fr 1fr}.fit-slide .poll,.fit-slide .schedule-comparison{grid-template-columns:1fr 1fr}
+ .fit-slide .poll-foot,.fit-slide .schedule-header,.fit-slide .schedule-source{flex-direction:row;align-items:center}
+ .fit-slide .below{flex-direction:row}.fit-slide .monthgrid{grid-template-columns:repeat(6,1fr)}
+ .fit-slide .content>.stack{max-width:none}
+ .fit-slide .photo.large{height:320px}.fit-slide .coverText{padding:18px}.fit-slide .lead{font-size:28px}
+}
+@media(max-height:650px){.app-header{height:52px}.stage-nav{height:48px}.lesson-header{padding-top:8px;padding-bottom:8px}.lesson-header h1{font-size:27px}.lesson-header .eyebrow{margin-bottom:4px}footer{height:52px}}
