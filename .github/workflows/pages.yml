@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     env:
       PAGES_ARTIFACT: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
@@ -50,5 +50,14 @@ jobs:
           exit 1
       - uses: actions/deploy-pages@v4
         id: deployment
+        continue-on-error: true
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT }}
+      - name: Allow deployment metadata to propagate
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 12
+      - uses: actions/deploy-pages@v4
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         with:
           artifact_name: ${{ env.PAGES_ARTIFACT }}
