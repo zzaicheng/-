@@ -7,7 +7,7 @@ const EYE_PLAYER_URL='https://player.bilibili.com/player.html?bvid=BV1Ab2XBTEww&
 const EYE_GUIDE_URL='./assets/eye-exercise.webm';
 
 export default function EyeExercise(){
- const [step,setStep]=useState(0),[video,setVideo]=useState(null);
+ const [step,setStep]=useState(0),[video,setVideo]=useState('bilibili');
  const cards=walk(data[8],n=>n.attrs.class==='eye-step-card'),card=cards[step],img=walk(card,n=>n.tag==='img')[0];
  return <main className="content eye-content">
   <div className="hero">눈 보호 체조 방법을 살펴보고, 체험 후 느낌을 정리해 봅시다.</div>
@@ -21,7 +21,7 @@ export default function EyeExercise(){
       : <video controls playsInline preload="metadata" aria-label="눈 보호 체조 6단계 안내 영상"><source src={EYE_GUIDE_URL} type="video/webm"/></video>}
      </div>
      <div className="video-actions">
-      <button onClick={()=>setVideo(null)}>← 설명으로 돌아가기</button>
+      <button onClick={()=>setVideo(null)}>← 단계 설명 보기</button>
       <a href={EYE_VIDEO_URL} target="_blank" rel="noopener noreferrer">bilibili에서 영상 열기 ↗</a>
       <button onClick={()=>setVideo(video==='bilibili'?'guide':'bilibili')}>{video==='bilibili'?'6단계 안내 영상 보기':'Bilibili 영상으로 돌아가기'}</button>
      </div>
