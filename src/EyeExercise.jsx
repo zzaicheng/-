@@ -4,31 +4,26 @@ import {walk,plain,Field,Complete,Photo} from './components';
 
 export const EYE_VIDEO_URL='https://www.bilibili.com/video/BV1Ab2XBTEww/';
 const EYE_PLAYER_URL='https://player.bilibili.com/player.html?bvid=BV1Ab2XBTEww&p=1&autoplay=0&danmaku=0';
-const EYE_GUIDE_URL='./assets/eye-exercise.webm';
 
 export default function EyeExercise(){
- const [step,setStep]=useState(0),[video,setVideo]=useState('bilibili');
+ const [step,setStep]=useState(0),[video,setVideo]=useState(false);
  const cards=walk(data[8],n=>n.attrs.class==='eye-step-card'),card=cards[step],img=walk(card,n=>n.tag==='img')[0];
  return <main className="content eye-content">
   <div className="hero">눈 보호 체조 방법을 살펴보고, 체험 후 느낌을 정리해 봅시다.</div>
   <div className="eye-layout">
    <div className="panel eye-view">
     <h2>{video?'눈 보호 체조 · 영상자료':'교과서 51쪽 | 눈 보호 체조 방법'}</h2>
-    <div className="step-tabs" role="group" aria-label="눈 보호 체조 단계">{cards.map((_,i)=><button key={i} aria-pressed={!video&&step===i} onClick={()=>{setStep(i);setVideo(null);}}>{i+1}단계</button>)}</div>
+    <div className="step-tabs" role="group" aria-label="눈 보호 체조 단계">{cards.map((_,i)=><button key={i} aria-pressed={!video&&step===i} onClick={()=>{setStep(i);setVideo(false);}}>{i+1}단계</button>)}</div>
     {video?<div className="eye-video">
-     <div className="video-frame">{video==='bilibili'
-      ? <iframe title="눈 보호 체조 Bilibili 영상" src={EYE_PLAYER_URL} allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/>
-      : <video controls playsInline preload="metadata" aria-label="눈 보호 체조 6단계 안내 영상"><source src={EYE_GUIDE_URL} type="video/webm"/></video>}
-     </div>
+     <div className="video-frame"><iframe title="눈 보호 체조 Bilibili 영상" src={EYE_PLAYER_URL} allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/></div>
      <div className="video-actions">
-      <button onClick={()=>setVideo(null)}>← 단계 설명 보기</button>
+      <button onClick={()=>setVideo(false)}>← 단계 설명 보기</button>
       <a href={EYE_VIDEO_URL} target="_blank" rel="noopener noreferrer">bilibili에서 영상 열기 ↗</a>
-      <button onClick={()=>setVideo(video==='bilibili'?'guide':'bilibili')}>{video==='bilibili'?'6단계 안내 영상 보기':'Bilibili 영상으로 돌아가기'}</button>
      </div>
     </div>:<div className="step-detail">
      <Photo src={img.attrs.src} alt={img.attrs.alt}/>
      <div><span className="eyebrow">STEP 0{step+1} / 06</span><p>{plain(walk(card,n=>n.tag==='p')[0])}</p>
-      <div className="step-controls"><button disabled={!step} onClick={()=>setStep(step-1)}>← 이전 단계</button>{step<5?<button onClick={()=>setStep(step+1)}>다음 단계 →</button>:<button className="primary" onClick={()=>setVideo('bilibili')}>영상자료 보기 →</button>}</div>
+      <div className="step-controls"><button disabled={!step} onClick={()=>setStep(step-1)}>← 이전 단계</button>{step<5?<button onClick={()=>setStep(step+1)}>다음 단계 →</button>:<button className="primary" onClick={()=>setVideo(true)}>영상자료 보기 →</button>}</div>
      </div>
     </div>}
    </div>
