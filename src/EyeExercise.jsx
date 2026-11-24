@@ -3,7 +3,7 @@ import data from './data/slides.json';
 import {walk,plain,Field,Complete,Photo} from './components';
 
 export const EYE_VIDEO_URL='https://www.bilibili.com/video/BV1Ab2XBTEww/';
-export const EYE_PLAYER_URL='https://player.bilibili.com/player.html?bvid=BV1Ab2XBTEww&p=1&autoplay=0&danmaku=0';
+const EYE_GUIDE_URL='./assets/eye-exercise.webm';
 
 export default function EyeExercise(){
  const [step,setStep]=useState(0),[video,setVideo]=useState(false);
@@ -15,9 +15,9 @@ export default function EyeExercise(){
     <h2>{video?'눈 보호 체조 · 영상자료':'교과서 51쪽 | 눈 보호 체조 방법'}</h2>
     <div className="step-tabs" role="group" aria-label="눈 보호 체조 단계">{cards.map((_,i)=><button key={i} aria-pressed={!video&&step===i} onClick={()=>{setStep(i);setVideo(false);}}>{i+1}단계</button>)}</div>
     {video?<div className="eye-video">
-     <div className="video-frame"><iframe title="눈 보호 체조 영상 · bilibili" src={EYE_PLAYER_URL} allow="fullscreen; picture-in-picture; encrypted-media" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/></div>
+     <div className="video-frame"><video controls playsInline preload="metadata" aria-label="눈 보호 체조 6단계 안내 영상"><source src={EYE_GUIDE_URL} type="video/webm"/></video></div>
      <div className="video-actions"><button onClick={()=>setVideo(false)}>← 설명으로 돌아가기</button><a href={EYE_VIDEO_URL} target="_blank" rel="noopener noreferrer">bilibili에서 영상 열기 ↗</a></div>
-     <p className="muted">외부 영상 · 인터넷 연결이 필요합니다. 재생이 안 되면 위의 원본 링크를 이용하세요.</p>
+     <p className="muted">교과서 동작을 참고한 6단계 사진 안내 영상입니다.</p>
     </div>:<div className="step-detail">
      <Photo src={img.attrs.src} alt={img.attrs.alt}/>
      <div><span className="eyebrow">STEP 0{step+1} / 06</span><p>{plain(walk(card,n=>n.tag==='p')[0])}</p>
